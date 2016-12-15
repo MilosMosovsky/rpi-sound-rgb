@@ -1,0 +1,7 @@
+{
+  "inputFile": "./output.raw",
+  "timeAverage": 10,
+  "smoothness": 50,
+  "agressivity": 20,
+  "bufferSize":  500000
+}

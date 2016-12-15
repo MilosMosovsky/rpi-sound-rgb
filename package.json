@@ -1,0 +1,24 @@
+{
+  "name": "rpi-sound-rgb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "run": "babel-node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MilosMosovsky/rpi-sound-rgb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MilosMosovsky/rpi-sound-rgb/issues"
+  },
+  "homepage": "https://github.com/MilosMosovsky/rpi-sound-rgb#readme",
+  "dependencies": {
+    "audio-analyser": "^1.0.2",
+    "average": "^0.0.1"
+  },
+  "devDependencies": {}
+}
