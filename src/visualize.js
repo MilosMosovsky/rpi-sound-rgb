@@ -1,6 +1,8 @@
 import fs from 'fs';
 import Analyser from 'audio-analyser';
 import average from 'average';
+import Speaker from 'audio-speaker';
+import blaster from 'pi-blaster.js';
 
 import settings from '../settings.json'
 
@@ -62,7 +64,7 @@ function resample(data, chunks) {
   resampled.map((data) => {
     if(data > 0 ){
       const percentage = getPercentage(data);
-      console.log(percentage);
+      piblaster.setPwm(27, percentage );
     }
   });
 }
