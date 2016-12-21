@@ -26,6 +26,10 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
+array-find@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/array-find/-/array-find-1.0.0.tgz#6c8e286d11ed768327f8e62ecee87353ca3e78b8"
+
 async@~0.2.6:
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
@@ -40,6 +44,68 @@ audio-analyser@^1.0.2:
     ndarray-fft "^1.0.0"
     pcm-util "^1.1.10"
     scijs-window-functions "^2.0.2"
+    xtend "^4.0.1"
+
+audio-buffer-utils@^3.0.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/audio-buffer-utils/-/audio-buffer-utils-3.1.2.tgz#1a2bf28ca1e1ee94381a6d4497137d078ce8cb17"
+  dependencies:
+    audio-buffer "^2.0.0"
+    is-audio-buffer "^1.0.0"
+    is-browser "^2.0.1"
+    typedarray-methods "^1.0.0"
+
+audio-buffer@^2.0.0, audio-buffer@^2.1.3:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/audio-buffer/-/audio-buffer-2.4.5.tgz#291ea5260f5006c077b69aaae764044d59be66f7"
+  dependencies:
+    audio-context latest
+    buffer-to-arraybuffer latest
+    is-audio-buffer "^1.0.1"
+    is-browser "^2.0.1"
+    is-buffer "^1.1.0"
+
+audio-context@^0.1.0, audio-context@latest:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/audio-context/-/audio-context-0.1.0.tgz#116ee83d566e10e7e845f29d9b1e1bc2ea3520d2"
+  dependencies:
+    global "~4.2.1"
+
+audio-sink@^1.0.2:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/audio-sink/-/audio-sink-1.1.6.tgz#e1454eb1378522298d2170b7cb032c33fd1f6885"
+  dependencies:
+    inherits "^2.0.1"
+    xtend "^4.0.1"
+
+audio-speaker@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/audio-speaker/-/audio-speaker-1.4.3.tgz#bc96be81dea4dbfdd62529152ce924946729f75c"
+  dependencies:
+    audio-through "^2.1.1"
+    inherits "^2.0.1"
+    is-audio-buffer "^1.0.1"
+    pcm-util "^2.0.3"
+    pull-stream "^3.4.5"
+    web-audio-stream "^2.1.2"
+    xtend "^4.0.1"
+  optionalDependencies:
+    audio-sink "^1.0.2"
+    speaker "^0.3.0"
+
+audio-through@^2.1.1:
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/audio-through/-/audio-through-2.1.9.tgz#6a0385f36868c433a471744a15fb6183daab9ce6"
+  dependencies:
+    array-find "^1.0.0"
+    audio-buffer "^2.1.3"
+    audio-context "^0.1.0"
+    get-uid "^1.0.1"
+    inherits "^2.0.1"
+    is-audio-buffer "^1.0.1"
+    is-promise "^2.1.0"
+    pcm-util "^2.0.1"
+    performance-now "^0.2.0"
     xtend "^4.0.1"
 
 average@^0.0.1:
@@ -389,9 +455,21 @@ babylon@^6.11.0:
   version "6.14.1"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.14.1.tgz#956275fab72753ad9b3435d7afe58f8bf0a29815"
 
+bindings@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+
 bit-twiddle@^1.0.0, bit-twiddle@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/bit-twiddle/-/bit-twiddle-1.0.2.tgz#0c6c1fabe2b23d17173d9a61b7b7093eb9e1769e"
+
+buffer-shims@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/buffer-shims/-/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
+
+buffer-to-arraybuffer@latest:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/buffer-to-arraybuffer/-/buffer-to-arraybuffer-0.0.4.tgz#f3e5e3f6f2632c71e7cdebe76ed1718fad421d4c"
 
 camelcase@^1.0.2:
   version "1.2.1"
@@ -474,6 +552,10 @@ decibels@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/decibels/-/decibels-1.0.1.tgz#ff90e6b2ce0edc69cef2249f1a3e95381753a8cc"
 
+dom-walk@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
+
 dup@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dup/-/dup-1.0.0.tgz#51fc5ac685f8196469df0b905e934b20af5b4029"
@@ -552,6 +634,17 @@ function-bind@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
 
+get-uid@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/get-uid/-/get-uid-1.0.1.tgz#ac6d5695550cb6be371d5a79b0d968115f746a22"
+
+global@~4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/global/-/global-4.2.1.tgz#c16801e9a47f0b0b847a156d419dc143b5a4e8b3"
+  dependencies:
+    min-document "^2.6.1"
+    process "~0.5.1"
+
 globals@^9.0.0:
   version "9.14.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.14.0.tgz#8859936af0038741263053b39d0e76ca241e4034"
@@ -582,13 +675,33 @@ iota-array@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/iota-array/-/iota-array-1.0.0.tgz#81ef57fe5d05814cd58c2483632a99c30a0e8087"
 
-is-buffer@^1.0.2:
+is-audio-buffer@^1.0.0, is-audio-buffer@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-audio-buffer/-/is-audio-buffer-1.0.1.tgz#a8317bc5f27198b5634701b06a01e5d8089b834d"
+
+is-browser@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/is-browser/-/is-browser-2.0.1.tgz#8bf0baf799a9c62fd9de5bcee4cf3397c3e7529a"
+
+is-buffer@^1.0.2, is-buffer@^1.1.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.4.tgz#cfc86ccd5dc5a52fa80489111c6920c457e2d98b"
+
+is-plain-obj@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
+
+is-promise@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
 
 isarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+
+isarray@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
 js-tokens@^2.0.0:
   version "2.0.0"
@@ -608,6 +721,10 @@ lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
 
+lodash.throttle@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+
 lodash@^4.2.0:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
@@ -622,6 +739,12 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^2.0.0"
 
+min-document@^2.6.1:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
+  dependencies:
+    dom-walk "^0.1.0"
+
 minimist@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
@@ -629,6 +752,10 @@ minimist@0.0.8:
 ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
+
+nan@^2.2.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
 
 ndarray-fft@^1.0.0:
   version "1.0.3"
@@ -669,6 +796,19 @@ pcm-util@^1.1.10:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/pcm-util/-/pcm-util-1.5.0.tgz#f5391f9e00192dd68a9a2055d71e342c427565b1"
 
+pcm-util@^2.0.1, pcm-util@^2.0.2, pcm-util@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/pcm-util/-/pcm-util-2.0.3.tgz#ce00a7dc663339b47f934b57a704a6c95716d1a7"
+  dependencies:
+    audio-buffer "^2.1.3"
+    is-audio-buffer "^1.0.1"
+    is-buffer "^1.1.0"
+    to-array-buffer "^1.0.0"
+
+performance-now@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
+
 pi-blaster.js@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/pi-blaster.js/-/pi-blaster.js-0.1.1.tgz#0050f8d56d49828169ae480fc58c062f32548880"
@@ -677,12 +817,36 @@ private@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.6.tgz#55c6a976d0f9bafb9924851350fe47b9b5fbb7c1"
 
+process-nextick-args@~1.0.6:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
+
+process@~0.5.1:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/process/-/process-0.5.2.tgz#1638d8a8e34c2f440a91db95ab9aeb677fc185cf"
+
+pull-stream@^3.4.4, pull-stream@^3.4.5:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/pull-stream/-/pull-stream-3.5.0.tgz#1ee5b6f76fd3b3a49a5afb6ded5c0320acb3cfc7"
+
 quote-stream@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/quote-stream/-/quote-stream-0.0.0.tgz#cde29e94c409b16e19dc7098b89b6658f9721d3b"
   dependencies:
     minimist "0.0.8"
     through2 "~0.4.1"
+
+readable-stream@^2.0.5:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.2.tgz#a9e6fec3c7dda85f8bb1b3ba7028604556fc825e"
+  dependencies:
+    buffer-shims "^1.0.0"
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "~1.0.0"
+    process-nextick-args "~1.0.6"
+    string_decoder "~0.10.x"
+    util-deprecate "~1.0.1"
 
 readable-stream@~1.0.17, readable-stream@~1.0.27-1:
   version "1.0.34"
@@ -764,6 +928,15 @@ source-map@~0.1.33:
   dependencies:
     amdefine ">=0.0.4"
 
+speaker@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/speaker/-/speaker-0.3.0.tgz#36e0ee37e74fb88f7ead9ac9b1f1517b9b82d253"
+  dependencies:
+    bindings "^1.2.1"
+    debug "^2.2.0"
+    nan "^2.2.0"
+    readable-stream "^2.0.5"
+
 static-eval@~0.2.0:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/static-eval/-/static-eval-0.2.4.tgz#b7d34d838937b969f9641ca07d48f8ede263ea7b"
@@ -807,9 +980,19 @@ through2@~0.4.1:
     readable-stream "~1.0.17"
     xtend "~2.1.1"
 
+to-array-buffer@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/to-array-buffer/-/to-array-buffer-1.2.0.tgz#03361a76a85cebadd160ca17f6e1e2d567c611fc"
+  dependencies:
+    is-audio-buffer "^1.0.1"
+
 to-fast-properties@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.2.tgz#f3f5c0c3ba7299a7ef99427e44633257ade43320"
+
+typedarray-methods@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/typedarray-methods/-/typedarray-methods-1.0.0.tgz#d656b078a9ff6134ed193794f8e55e158204ad0d"
 
 typedarray-pool@^1.0.0:
   version "1.1.0"
@@ -838,6 +1021,23 @@ uglify-to-browserify@~1.0.0:
 uniq@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
+
+util-deprecate@~1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
+
+web-audio-stream@^2.1.2:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/web-audio-stream/-/web-audio-stream-2.2.0.tgz#5975a1a69c4b12d23e49b1e921925c8c04c6314b"
+  dependencies:
+    audio-buffer-utils "^3.0.0"
+    audio-context "^0.1.0"
+    inherits "^2.0.1"
+    is-audio-buffer "^1.0.1"
+    is-plain-obj "^1.1.0"
+    pcm-util "^2.0.2"
+    pull-stream "^3.4.4"
+    xtend "^4.0.1"
 
 window-size@0.1.0:
   version "0.1.0"
