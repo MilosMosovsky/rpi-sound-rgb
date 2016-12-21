@@ -1,10 +1,33 @@
+import path from 'path';
+import argv from 'argv';
+
 import * as Utils from './lib/Utils';
 import RGBControl from './lib/RGBControl';
+import SettingsBin from './lib/Settings';
+import AudioAnalyser from './lib/Analyser';
+import QueueBin from './lib/Queue';
 
 const RGB = new RGBControl(27, 22, 23);
+const Settings = new SettingsBin(path.join(process.cwd(), 'settings.json'));
+const Analyser = new AudioAnalyser(Settings.analyserSettings());
+
 RGB.setColor(255, 255, 255);
 
-Utils.fadeNumberTo(0, 100, (number) => {
-  console.log(number);
-  RGB.setIntensity(number/ 100);
-}, 5000);
+Analyser.open(path.join(process.cwd(), 'output.raw'));
+
+setInterval(() => {
+  const sampleSize = 8;
+  const timeShift = sampleSize/2;
+  const sample = Analyser.queue().pull(sampleSize);
+  let end = sampleSize - timeShift;
+  if ( end >= sample.length) {
+    end = sample.length -1;
+  }
+
+  const historyData = sample.slice(0, end);
+  const freshData = sample.slice(end);
+
+  const result = Analyser.analyzeData(freshData, historyData);
+
+  RGB.setIntensity(result);
+}, 50);

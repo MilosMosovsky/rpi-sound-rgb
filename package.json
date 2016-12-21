@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MilosMosovsky/rpi-sound-rgb#readme",
   "dependencies": {
+    "argv": "^0.0.2",
     "audio-analyser": "^1.0.2",
     "audio-speaker": "^1.4.3",
     "average": "^0.0.1",

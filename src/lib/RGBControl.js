@@ -17,9 +17,9 @@ class RGBControl {
   }
 
   setColor(red, green, blue) {
-    this.redAmount = red;
-    this.greenAmount = green;
-    this.blueAmount = blue;
+    this.redAmount = red / 255;
+    this.greenAmount = green / 255;
+    this.blueAmount = blue / 255;
 
     this.run();
   }
