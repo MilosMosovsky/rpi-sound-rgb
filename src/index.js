@@ -15,6 +15,7 @@ RGB.setColor(255, 255, 255);
 
 Analyser.open(path.join(process.cwd(), 'output.raw'));
 
+let lastValue = 0;
 setInterval(() => {
   const sampleSize = 8;
   const timeShift = sampleSize/2;
@@ -29,5 +30,11 @@ setInterval(() => {
 
   const result = Analyser.analyzeData(freshData, historyData);
 
-  RGB.setIntensity(result);
-}, 50);
+  Utils.fadeNumberTo(lastValue, result, (val) => {
+    RGB.setIntensity(val);
+    console.log(val);
+  });
+
+  lastValue = result;
+
+}, 500);
