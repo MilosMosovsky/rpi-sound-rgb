@@ -56,9 +56,11 @@ class Analyser {
   run() {
     const options = this._options;
     const queue = this._queue;
+    const socket = this.socket;
     const resampler = this.resample;
     let lastTime = new Date().getTime();
 
+    const that = this;
     this._analyser.on('data', function(data) {
       const now = new Date().getTime();
       const bin = new Uint8Array(options.binCount);
@@ -73,7 +75,7 @@ class Analyser {
       // queue.push(bin, now-lastTime);
       // lastTime = now;
 
-      this.socket.emit('sync:data', {
+      socket.emit('sync:data', {
         payload: bin,
       });
     });
