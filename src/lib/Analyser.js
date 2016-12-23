@@ -61,7 +61,6 @@ class Analyser {
 
     this._analyser.on('data', function(data) {
       const now = new Date().getTime();
-      console.log(now-lastTime);
       const bin = new Uint8Array(options.binCount);
       const binTimeData = new Uint8Array(options.binCount);
       const floatBin = new Float32Array(options.binCount);
@@ -70,7 +69,7 @@ class Analyser {
       this.getByteFrequencyData(bin);
 
       const resampledData = resampler(bin);
-      console.log('data recieved');
+      console.log('Pushing data');
       // queue.push(bin, now-lastTime);
       // lastTime = now;
 
