@@ -4,7 +4,7 @@ import fs from 'fs';
 import argv from 'argv';
 import QueueBin from './Queue'
 import * as Utils from './Utils';
-
+import socket from 'socket.io-client';
 
 argv.option([{ name: 'play', type: 'boolean' } ]);
 const args = argv.run();
@@ -13,6 +13,7 @@ class Analyser {
   constructor(options) {
     this._analyser = new AudioAnalyser(options);
     this._options = options;
+    this.socket = socket('http://localhost:9002');
 
     this._queue = new QueueBin();
     this.run();
@@ -70,8 +71,12 @@ class Analyser {
 
       const resampledData = resampler(bin);
       console.log('data recieved');
-      queue.push(bin, now-lastTime);
-      lastTime = now;
+      // queue.push(bin, now-lastTime);
+      // lastTime = now;
+
+      this.socket.emit('sync:data', {
+        payload: bin,
+      });
     });
   }
 

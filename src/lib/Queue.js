@@ -42,10 +42,8 @@ class Queue {
   }
 
   publishInput(data, delay) {
-    let payload = [];
-    data.map((item) => payload.push(item));
     this.socket.emit('sync:data', {
-      payload,
+      payload: data,
       delay
     });
   }
