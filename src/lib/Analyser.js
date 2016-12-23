@@ -5,7 +5,7 @@ import argv from 'argv';
 import QueueBin from './Queue'
 import * as Utils from './Utils';
 import socket from 'socket.io-client';
-import RGBClient from './lib/RGBClient'
+import RGBClient from './RGBClient'
 
 argv.option([{ name: 'play', type: 'boolean' } ]);
 const args = argv.run();
