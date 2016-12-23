@@ -1,110 +1,121 @@
-import fs from 'fs';
-import Analyser from 'audio-analyser';
-import average from 'average';
-import Speaker from 'audio-speaker';
-import blaster from 'pi-blaster.js';
-import throttle from 'lodash.throttle';
+import http from 'http';
+import socket from 'socket.io';
+import QueueBin from './lib/Queue';
+import RGBClient from './lib/RGBClient'
+import * as Utils from './lib/Utils';
+import PercentageScale from './lib/PercentageScale';
 
-import settings from '../settings.json'
+const server = http.createServer();
+const io = socket(server);
+const queue = new QueueBin();
+const RGBclient = new RGBClient('http://xifi.local:10000');
+const percentage = new PercentageScale(10);
+RGBclient.setColor(255, 0, 255);
 
-const timeAverage = settings.timeAverage;
-const smoothness = settings.smoothness;
-const agressivity = settings.agressivity;
-const samples = 1024 * agressivity;
-const binCount = samples/2;
 
-var analyser = new Analyser({
-  fftSize: samples,
-  frequencyBinCount: binCount,
-  bufferSize: settings.bufferSize,
-  smoothingTimeConstant: 0,
-  minDecibels: -100,
-  maxDecibels: -50
-});
+let lastData = [];
 
-console.log(`Reading: ${settings.inputFile}`);
-const stream = fs.createReadStream(settings.inputFile);
-stream.pipe(analyser);
+function bufferMaximum() {
+  let maximum = 0;
 
-if(settings.test) {
-  stream.pipe(Speaker())
-}
-
-let lastData = [250];
-
-function adjustPercentage(data) {
-  lastData.push(data);
-
-  if(lastData.length > timeAverage) {
-    lastData = lastData.splice(0,1);
-  }
-}
-
-function getPercentage(data) {
-  const max = Math.max(...lastData);
-  const percentage = (data / max) * 100;
-
-  if(percentage > 100) {
-    return 100;
-  }
-  if(percentage <= 0) {
-    return 0;
-  }
-
-  return percentage;
-}
-
-function resample(data, chunks) {
-  chunks = chunks || smoothness;
-
-  let resampled = [];
-  let chunk = 0;
-  const sampleSize = data.length / (data.length/ chunks);
-
-  while(chunk < data.length) {
-    resampled.push(data[chunk]);
-    chunk += sampleSize;
-  }
-
-  resampled.map((data) => {
-    if(data > 0 ){
-      const percentage = getPercentage(data);
-      // piblaster.setPwm(27, percentage );
-      throttle(() => {
-        putPercentage(percentage)
-      }, 1000)()
+  lastData.forEach((data) => {
+    const max = Utils.averageArray(data);
+    if(max>maximum) {
+      maximum = max;
     }
-  });
+  })
+
+  return maximum;
 }
+io.on('connection', function(client){
+  // console.log('Connected slave', client.id);
 
-analyser.on('data', function(d) {
-  const bin = new Uint8Array(binCount);
-  this.getByteFrequencyData(bin);
+  // client.on('sync:queue', function(data){
+  //   queue.sync(data);
+  //   console.log(data.length);
+  // });
 
-  adjustPercentage( average(bin) );
-  resample(bin);
+
+  client.on('sync:data', function(data){
+    // console.log('Forward data to the clients with delay', data.delay);
+    // console.log(data)
+    const avg = Utils.averageArray(data.payload);
+
+    if(lastData.length > 100) {
+      lastData.splice(0, 1);
+    }
+
+    // let maximums = [];
+    // lastData.map((arr) => {
+    //   maximums.push(Utils.averageArray(arr));
+    // });
+
+    // let intensity = ( avg / Utils.averageArray(maximums)).toFixed(2);
+
+    // console.log('buffer maximum', bufferMaximum());
+    // console.log('now', avg);
+
+    let intensity = (avg / bufferMaximum()).toFixed(2)
+    if ( intensity > 1) {
+      intensity = 1;
+    }
+
+    if (intensity < 0) {
+      intensity = 0;
+    }
+    console.log(intensity);
+
+    RGBclient.setColor(255, 0, 255);
+    RGBclient.setIntensity(intensity);
+
+    lastData.push(data.payload);
+
+    console.log(data.payload.length);
+    io.emit('visualize', data.payload);
+  });
+
+
+
 });
 
 
-function putPercentage(data) {
-  //console.log(data)
-}
+server.listen(9002);
 
-let lastValue = 0;
-function fadeTo(amount)  {
-  let starting = lastValue;
-
-  const portion = Math.abs(amount - lastValue) / 500;
-
-  setTimeout(() => {
-    console.log(starting);
-    lastValue += starting;
-  }, 50)
-}
-
-setInterval(() => {
-  const value = (Math.random() * 100) + 1;
-  fadeTo(value);
-  lastValue = value;
-
-}, 500);
+//
+// let lastRun = 0;
+//
+// setInterval(() => {
+//   const now = new Date().getTime();
+//   if((now - lastRun) > 100) {
+//     digest();
+//     lastRun = now;
+//   }
+// })
+//
+//
+// let lastValue = 0;
+// function digest() {
+//   const sample = queue.pull(1);
+//   const result = Utils.averageArray(sample);
+//   const scale = percentage.getPercentage(result);
+//   //
+//   // console.log(scale);
+//   client.setIntensity(scale);
+//   //   if(lastValue < scale) {
+//   //     while(lastValue < scale) {
+//   //       client.setIntensity(lastValue);
+//   //       lastValue += 0.1;
+//   //     }
+//   //   } else {
+//   //     while(lastValue > scale) {
+//   //       client.setIntensity(lastValue);
+//   //       lastValue -= 0.1;
+//   //     }
+//   //   }
+//   //   Utils.fadeNumberTo(lastValue, scale, (percentage) => {
+//   //     // console.log(percentage);
+//   //     client.setIntensity(percentage);
+//   // }, 80, 5);
+//
+//   lastValue = scale;
+// }

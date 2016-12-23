@@ -1,4 +1,5 @@
 import fs from 'fs';
+import blackmanHarris from 'scijs-window-functions/blackman-harris';
 
 class Settings {
   constructor(fileName) {
@@ -23,7 +24,10 @@ class Settings {
       binCount: this._config.binCount,
       smoothingTimeConstant: 0,
       minDecibels: -100,
-      maxDecibels: -50
+      maxDecibels: -30,
+      applyWindow: function (sampleNumber, totalSamples) {
+        return blackmanHarris(sampleNumber, totalSamples);
+      }
     }
   }
 }

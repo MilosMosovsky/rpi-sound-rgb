@@ -23,3 +23,14 @@ export function averageArray(arr) {
 
   return sum / arr.length;
 }
+
+export function analyze(data, history) {
+    const avgCurrent = averageArray(data);
+    const avgHistory = averageArray(history);
+
+    // console.log('average amount of history', avgHistory);
+    // console.log('average ammount current', avgCurrent);
+
+    const percentage = avgCurrent / avgHistory;
+    return percentage < 1 ? percentage : 1;
+}

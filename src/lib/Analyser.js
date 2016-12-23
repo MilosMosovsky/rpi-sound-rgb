@@ -39,7 +39,7 @@ class Analyser {
     this._stream.pipe(Speaker())
   }
 
-  resample(data, chunks = 50) {
+  resample(data, chunks = 20) {
     let resampled = [];
     let chunk = 0;
     const sampleSize = Math.floor(data.length / chunks);
@@ -56,31 +56,26 @@ class Analyser {
     const options = this._options;
     const queue = this._queue;
     const resampler = this.resample;
+    let lastTime = new Date().getTime();
 
-    this._analyser.on('data', function() {
+    this._analyser.on('data', function(data) {
+      const now = new Date().getTime();
+      console.log(now-lastTime);
       const bin = new Uint8Array(options.binCount);
+      const binTimeData = new Uint8Array(options.binCount);
+      const floatBin = new Float32Array(options.binCount);
+      this.getFloatFrequencyData(floatBin);
+      this.getByteTimeDomainData(binTimeData);
       this.getByteFrequencyData(bin);
 
       const resampledData = resampler(bin);
-
-      queue.push(resampledData);
+      console.log('data recieved');
+      queue.push(bin, now-lastTime);
+      lastTime = now;
     });
   }
 
-  analyzeData(data, history) {
-    const currentData = data.map(Utils.averageArray);
-    const historyData = history.map(Utils.averageArray);
 
-    // console.log(currentData);
-    // console.log(historyData);
-    const avgCurrent = Utils.averageArray(currentData);
-    const avgHistory = Utils.averageArray(historyData);
-
-    // console.log('Avg in current is', avgCurrent);
-    // console.log('Avg in history', avgHistory);
-    const percentage = avgCurrent / avgHistory;
-    return percentage < 1 ? percentage : 1;
-  }
 }
 
 export default Analyser;
