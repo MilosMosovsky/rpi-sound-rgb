@@ -6,7 +6,8 @@ import AudioAnalyser from './lib/Analyser';
 const Settings = new SettingsBin(path.join(process.cwd(), 'settings.json'));
 const Analyser = new AudioAnalyser(Settings.analyserSettings());
 
-Analyser.open(path.join(process.cwd(), 'output.raw'));
+Analyser.open(Settings.config().inputFile);
+Analyser.open('/tmp/audi');
 
 //
 // let lastValue = 0;

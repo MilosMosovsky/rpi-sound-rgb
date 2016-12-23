@@ -12,8 +12,13 @@ class Settings {
       agressivity: settings.agressivity,
       samples: 1024 * settings.agressivity,
       binCount: (1024 * settings.agressivity) / 2,
-      bufferSize: settings.bufferSize
+      bufferSize: settings.bufferSize,
+      inputfile: settings.inputFile
     }
+  }
+
+  config() {
+    return this._config;
   }
 
   analyserSettings() {
