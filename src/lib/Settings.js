@@ -13,7 +13,7 @@ class Settings {
       samples: 1024 * settings.agressivity,
       binCount: (1024 * settings.agressivity) / 2,
       bufferSize: settings.bufferSize,
-      inputfile: settings.inputFile
+      inputFile: settings.inputFile
     }
   }
 
