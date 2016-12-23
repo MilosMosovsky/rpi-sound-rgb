@@ -21,6 +21,8 @@ class Analyser {
 
     this._queue = new QueueBin();
     this.run();
+
+    this.buffer = [];
   }
 
   queue() {
@@ -57,6 +59,15 @@ class Analyser {
     return resampled;
   }
 
+  pushBuffer(data) {
+    this.buffer.push(data);
+
+    if(this.buffer.length > 5) {
+      this.buffer.splice(0,1);
+    }
+
+    return this.buffer;
+  }
   run() {
     const options = this._options;
     const queue = this._queue;
@@ -83,8 +94,21 @@ class Analyser {
       //   payload: bin,
       // });
       const avg = Utils.averageArray(bin);
+      const buffer = this.pushBuffer(bin);
+
+      let maximum = 0;
+
+      buffer.map((b) => {
+        const localMaximum = Utils.averageArray(b);
+
+        if(localMaximum > maximum) {
+          maximum = localMaximum;
+        }
+      });
+
+
       RGBclient.setColor(255, 0, 255);
-      const intensity = avg / 255;
+      const intensity = Math.round(avg / maximum);
       RGBclient.setIntensity(intensity);
     });
   }
