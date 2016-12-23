@@ -94,7 +94,7 @@ class Analyser {
       //   payload: bin,
       // });
       const avg = Utils.averageArray(bin);
-      const buffer = this.pushBuffer(bin);
+      const buffer = that.pushBuffer(bin);
 
       let maximum = 0;
 
