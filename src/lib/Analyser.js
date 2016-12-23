@@ -5,9 +5,13 @@ import argv from 'argv';
 import QueueBin from './Queue'
 import * as Utils from './Utils';
 import socket from 'socket.io-client';
+import RGBClient from './lib/RGBClient'
 
 argv.option([{ name: 'play', type: 'boolean' } ]);
 const args = argv.run();
+
+const RGBclient = new RGBClient('http://xifi.local:10000');
+RGBclient.setColor(255, 0, 255);
 
 class Analyser {
   constructor(options) {
@@ -71,13 +75,16 @@ class Analyser {
       this.getByteFrequencyData(bin);
 
       const resampledData = resampler(bin);
-      console.log('Pushing data');
-      // queue.push(bin, now-lastTime);
-      // lastTime = now;
-
-      socket.emit('sync:data', {
-        payload: bin,
-      });
+      // console.log('Pushing data');
+      // // queue.push(bin, now-lastTime);
+      // // lastTime = now;
+      //
+      // socket.emit('sync:data', {
+      //   payload: bin,
+      // });
+      RGBclient.setColor(255, 0, 255);
+      const intensity = (Math.random() * 100) + 1;
+      RGBclient.setIntensity(intensity / 100);
     });
   }
 
