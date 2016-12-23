@@ -82,9 +82,10 @@ class Analyser {
       // socket.emit('sync:data', {
       //   payload: bin,
       // });
+      const avg = Utils.averageArray(bin);
       RGBclient.setColor(255, 0, 255);
-      const intensity = (Math.random() * 100) + 1;
-      RGBclient.setIntensity(intensity / 100);
+      const intensity = avg / 255;
+      RGBclient.setIntensity(intensity);
     });
   }
 
